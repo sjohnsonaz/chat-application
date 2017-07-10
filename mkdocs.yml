@@ -1,0 +1,7 @@
+site_name: Chat Application
+site_url: https://sjohnsonaz.github.io/chat-application
+repo_url: https://github.com/sjohnsonaz/chat-application
+copyright: Copyright &copy; 2017 Sean Johnson
+pages:
+    - Home: index.md
+theme: readthedocs
