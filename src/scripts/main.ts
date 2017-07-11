@@ -3,11 +3,15 @@ import firebase from 'firebase';
 import config from './config';
 
 export function run() {
-    firebase.initializeApp(config);
-    firebase.auth();
-    firebase.storage();
-    firebase.database();
-    return 'Application started...';
+    try {
+        firebase.initializeApp(config);
+        firebase.auth();
+        firebase.storage();
+        firebase.database();
+    }
+    finally {
+        return 'Application started...';
+    }
 }
 
 window.onload = function () {
