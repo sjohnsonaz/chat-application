@@ -4,6 +4,9 @@ import config from './config';
 
 export function run() {
     firebase.initializeApp(config);
+    firebase.auth();
+    firebase.storage();
+    firebase.database();
     return 'Application started...';
 }
 
