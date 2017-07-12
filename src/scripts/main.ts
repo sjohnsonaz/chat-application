@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 
 import config from './config';
+import { run as runView } from './Application';
 
 export function run() {
     try {
@@ -10,6 +11,7 @@ export function run() {
         firebase.database();
     }
     finally {
+        runView('root');
         return 'Application started...';
     }
 }

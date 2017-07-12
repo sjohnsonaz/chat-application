@@ -1,8 +1,10 @@
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
-        'main': './src/scripts/main.ts'
+        'main': './src/scripts/main.ts',
+        'styles': './src/tyles/style.styl'
     },
     output: {
         filename: './dist/bundle/[name].min.js',
@@ -20,9 +22,30 @@ module.exports = {
         loaders: [{
             test: /\.tsx?$/,
             loader: 'ts-loader'
+        }, {
+            test: /\.styl$/,
+            loader: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [
+                    'css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    'stylus-loader'
+                ]
+            })
+        }, {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [
+                    'css-loader',
+                    'clean-css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } }
+                ]
+            })
         }]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin(),
+        new ExtractTextPlugin("./dist/bundle/[name].css")
     ]
 };

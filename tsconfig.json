@@ -6,6 +6,7 @@
     "moduleResolution": "node",
     "isolatedModules": false,
     "jsx": "react",
+    "jsxFactory": "Cascade.createElement",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declaration": false,
