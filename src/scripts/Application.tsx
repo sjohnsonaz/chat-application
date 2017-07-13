@@ -1,4 +1,5 @@
 import Cascade from 'cascade';
+import firebase from 'firebase';
 
 import ViewModel from './implementations/states/ViewModel';
 
@@ -10,4 +11,9 @@ export function run(id: string) {
         viewModel: viewModel
     };
     Cascade.render(id, <View viewModel={viewModel} />);
+
+    // Load data
+    firebase.database().ref('/Test').once('value').then((snapshot) => {
+        viewModel.value = snapshot.val();
+    });
 }

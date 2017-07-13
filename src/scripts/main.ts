@@ -8,7 +8,6 @@ export function run() {
         firebase.initializeApp(config);
         firebase.auth();
         firebase.storage();
-        firebase.database();
     }
     finally {
         runView('root');
