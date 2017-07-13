@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+require('es6-promise').polyfill();
 
 import config from './config';
 import { run as runView } from './Application';
