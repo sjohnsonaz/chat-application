@@ -13,7 +13,16 @@ export function run(id: string) {
     Cascade.render(id, <View viewModel={viewModel} />);
 
     // Load data
-    firebase.database().ref('/Test').once('value').then((snapshot) => {
-        viewModel.value = snapshot.val();
+    let messagesRef = firebase.database().ref('/Messages');
+    messagesRef.on('child_added', (data) => {
+        viewModel.messages.set(parseInt(data.key), data.val());
+    });
+
+    messagesRef.on('child_changed', (data) => {
+        viewModel.messages.set(parseInt(data.key), data.val());
+    });
+
+    messagesRef.on('child_removed', (data) => {
+        viewModel.messages.remove(parseInt(data.key));
     });
 }

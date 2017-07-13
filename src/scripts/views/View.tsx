@@ -23,11 +23,12 @@ export default class View extends Component<IViewProps> {
                         ]} animated>
                         <div>
                             Tab 0
-                            <div>Test</div>
-                            <div>{viewModel.value}</div>
-                            <ButtonBar>
-                                <Button>Test</Button>
-                            </ButtonBar>
+                            <div>Messages</div>
+                            <ul>
+                                {viewModel.messages.map((message) => {
+                                    return <li>{message}</li>
+                                })}
+                            </ul>
                         </div>
                         <div>Tab 1</div>
                         <div>Tab 2</div>
