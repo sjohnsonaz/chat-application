@@ -1,5 +1,5 @@
 import Cascade, { Component } from 'cascade';
-import { Section, Button, ButtonBar, Tab } from 'cascade-components';
+import { Section, Button, ButtonBar, Tab, Form, FormInput, FormContainer } from 'cascade-components';
 
 import { IViewModel } from '../interfaces/states/IViewModel';
 
@@ -8,6 +8,13 @@ export interface IViewProps {
 }
 
 export default class View extends Component<IViewProps> {
+    send = (event: Event) => {
+        event.preventDefault();
+        this.props.viewModel.send();
+    }
+    setMessage = (event: Event) => {
+        this.props.viewModel.message = (event.target as any).value;
+    }
     render() {
         let { viewModel } = this.props;
         return (
@@ -17,18 +24,22 @@ export default class View extends Component<IViewProps> {
                         activeIndex={viewModel.tabIndex}
                         onSelectPanel={viewModel.setTabIndex}
                         titles={[
-                            'Tab 0',
+                            'Messages',
                             'Tab 1',
                             'Tab 2'
                         ]} animated>
                         <div>
-                            Tab 0
-                            <div>Messages</div>
                             <ul>
                                 {viewModel.messages.map((message) => {
                                     return <li>{message}</li>
                                 })}
                             </ul>
+                            <FormContainer title="Message">
+                                <Form>
+                                    <input type="text" className="input" value={viewModel.message} onchange={this.setMessage} />
+                                    <Button onclick={this.send} theme="primary">Send</Button>
+                                </Form>
+                            </FormContainer>
                         </div>
                         <div>Tab 1</div>
                         <div>Tab 2</div>

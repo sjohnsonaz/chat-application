@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "artistry": "0.0.2",
-    "cascade": "0.0.24",
+    "cascade": "0.0.25",
     "cascade-components": "0.0.5",
     "es6-promise": "^4.1.1",
     "firebase": "4.1.3"
