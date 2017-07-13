@@ -1,7 +1,13 @@
 import Cascade from 'cascade';
 
-import View from './View';
+import ViewModel from './implementations/states/ViewModel';
+
+import View from './views/View';
 
 export function run(id: string) {
-    Cascade.render(id, <View />);
+    let viewModel = new ViewModel();
+    (window as any).$global = {
+        viewModel: viewModel
+    };
+    Cascade.render(id, <View viewModel={viewModel} />);
 }

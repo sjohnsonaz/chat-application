@@ -12,10 +12,10 @@ export function run() {
     }
     finally {
         runView('root');
-        return 'Application started...';
     }
 }
 
 window.onload = function () {
-    console.log(run());
+    run();
+    console.log('Application started...');
 }
