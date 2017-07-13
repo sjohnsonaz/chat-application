@@ -13,11 +13,14 @@ export default class View extends Component<IViewProps> {
         return (
             <div class="container">
                 <Section title="Chat Application">
-                    <Tab titles={[
-                        'Tab 0',
-                        'Tab 1',
-                        'Tab 2'
-                    ]} animated>
+                    <Tab
+                        activeIndex={viewModel.tabIndex}
+                        onSelectPanel={viewModel.setTabIndex}
+                        titles={[
+                            'Tab 0',
+                            'Tab 1',
+                            'Tab 2'
+                        ]} animated>
                         <div>
                             Tab 0
                             <div>Test</div>
