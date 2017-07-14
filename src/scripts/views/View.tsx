@@ -8,6 +8,9 @@ export interface IViewProps {
 }
 
 export default class View extends Component<IViewProps> {
+    setTabIndex = (tabIndex: number) => {
+        this.props.viewModel.setTabIndex(tabIndex);
+    }
     send = (event: Event) => {
         event.preventDefault();
         this.props.viewModel.send();
@@ -22,7 +25,7 @@ export default class View extends Component<IViewProps> {
                 <Section title="Chat Application">
                     <Tab
                         activeIndex={viewModel.tabIndex}
-                        onSelectPanel={viewModel.setTabIndex}
+                        onSelectPanel={this.setTabIndex}
                         titles={[
                             'Messages',
                             'Tab 1',
