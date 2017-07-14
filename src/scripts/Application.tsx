@@ -23,7 +23,7 @@ export function run(id: string) {
     });
 
     messagesRef.on('child_removed', (data) => {
-        viewModel.messages.remove(keyToIndex(data.key));
+        viewModel.messages.splice(keyToIndex(data.key), 1);
     });
 }
 
@@ -35,6 +35,6 @@ function keyToIndex(key: string) {
     } else {
         hash[key] = hashIndex;
         hashIndex++;
-        return hashIndex;
+        return hash[key];
     }
 }
