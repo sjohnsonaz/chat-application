@@ -1,5 +1,5 @@
 import Cascade, { Component } from 'cascade';
-import { Section, Button, ButtonBar, Tab, Form, FormInput, FormContainer } from 'cascade-components';
+import { Section, Button, ButtonBar, Tab, Form, FormInput, FormActions, FormContainer } from 'cascade-components';
 
 import { IViewModel } from '../interfaces/states/IViewModel';
 
@@ -37,12 +37,14 @@ export default class View extends Component<IViewProps> {
                                     return <li>{message}</li>
                                 })}
                             </ul>
-                            <FormContainer title="Message">
-                                <Form>
+                            <Form>
+                                <FormContainer title="Message">
                                     <input type="text" className="input" value={viewModel.message} onchange={this.setMessage} />
+                                </FormContainer>
+                                <FormActions>
                                     <Button onclick={this.send} theme="primary">Send</Button>
-                                </Form>
-                            </FormContainer>
+                                </FormActions>
+                            </Form>
                         </div>
                         <div>Tab 1</div>
                         <div>Tab 2</div>
