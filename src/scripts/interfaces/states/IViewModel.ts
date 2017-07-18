@@ -1,7 +1,7 @@
-import { ObservableArray } from 'cascade';
+import { IHash } from 'cascade';
 
 export interface IViewModel {
-    messages: ObservableArray<any>;
+    messages: IHash<string>;
     message: string;
     value: number;
     tabIndex: number;

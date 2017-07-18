@@ -15,26 +15,14 @@ export function run(id: string) {
     // Load data
     let messagesRef = firebase.database().ref('/Messages');
     messagesRef.on('child_added', (data) => {
-        viewModel.messages.set(keyToIndex(data.key), data.val());
+        viewModel.messages[data.key] = data.val();
     });
 
     messagesRef.on('child_changed', (data) => {
-        viewModel.messages.set(keyToIndex(data.key), data.val());
+        viewModel.messages[data.key] = data.val();
     });
 
     messagesRef.on('child_removed', (data) => {
-        viewModel.messages.splice(keyToIndex(data.key), 1);
+        delete viewModel.messages[data.key];
     });
-}
-
-let hash = {};
-let hashIndex = 0;
-function keyToIndex(key: string) {
-    if (hash[key]) {
-        return hash[key];
-    } else {
-        hash[key] = hashIndex;
-        hashIndex++;
-        return hash[key];
-    }
 }

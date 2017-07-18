@@ -33,8 +33,9 @@ export default class View extends Component<IViewProps> {
                         ]} animated>
                         <div>
                             <ul>
-                                {viewModel.messages.map((message) => {
-                                    return <li>{message}</li>
+                                {Object.keys(viewModel.messages).map((key) => {
+                                    let message = viewModel.messages[key];
+                                    return <li key={key}>{message}</li>
                                 })}
                             </ul>
                             <FormContainer title="Message">

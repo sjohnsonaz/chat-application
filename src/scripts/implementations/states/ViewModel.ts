@@ -1,10 +1,10 @@
-import { observable, array, ObservableArray } from 'cascade';
+import { observable, hash, ObservableArray, IHash } from 'cascade';
 import firebase from 'firebase';
 
 import { IViewModel } from '../../interfaces/states/IViewModel';
 
 export default class ViewModel implements IViewModel {
-    @array messages: ObservableArray<any> = [] as any;
+    @hash messages: IHash<string> = {};
     @observable message: string = '';
     @observable value: number = 1234;
     @observable tabIndex: number = 0;
