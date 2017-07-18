@@ -5,6 +5,8 @@ export interface IViewModel {
     message: string;
     value: number;
     tabIndex: number;
+    active: boolean;
     setTabIndex(tabIndex: number): void;
+    setActive(active: boolean): void;
     send(): void;
 }

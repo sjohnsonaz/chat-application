@@ -8,8 +8,12 @@ export default class ViewModel implements IViewModel {
     @observable message: string = '';
     @observable value: number = 1234;
     @observable tabIndex: number = 0;
+    @observable active: boolean = false;
     setTabIndex(tabIndex: number) {
         this.tabIndex = tabIndex;
+    }
+    setActive(active: boolean) {
+        this.active = active;
     }
     send() {
         let messagesRef = firebase.database().ref('/Messages');

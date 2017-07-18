@@ -11,6 +11,9 @@ export default class View extends Component<IViewProps> {
     setTabIndex = (tabIndex: number) => {
         this.props.viewModel.setTabIndex(tabIndex);
     }
+    setActive = (event: Event) => {
+        this.props.viewModel.setActive(!this.props.viewModel.active);
+    }
     send = (event: Event) => {
         event.preventDefault();
         this.props.viewModel.send();
@@ -43,11 +46,18 @@ export default class View extends Component<IViewProps> {
                                     <input type="text" className="input" value={viewModel.message} onchange={this.setMessage} />
                                 </FormContainer>
                                 <FormActions>
-                                    <Button onclick={this.send} theme="primary">Send</Button>
+                                    <Button onclick={this.send} disabled={!viewModel.message} theme="primary">Send</Button>
                                 </FormActions>
                             </Form>
                         </div>
-                        <div>Tab 1</div>
+                        <div>
+                            <h2>Tab 1</h2>
+                            <Form>
+                                <FormContainer title="Active">
+                                    <input type="checkbox" checked={viewModel.active} onchange={this.setActive} />
+                                </FormContainer>
+                            </Form>
+                        </div>
                         <div>Tab 2</div>
                     </Tab>
                 </Section>
