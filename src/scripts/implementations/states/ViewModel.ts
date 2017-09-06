@@ -1,14 +1,22 @@
 import { observable, hash, ObservableArray, IHash } from 'cascade';
 import firebase from 'firebase';
 
+import FireBaseCollection from '../../util/FireBaseCollection';
+
 import { IViewModel } from '../../interfaces/states/IViewModel';
 
 export default class ViewModel implements IViewModel {
     @hash messages: IHash<string> = {};
     @observable message: string = '';
+    messagesRef: firebase.database.Reference;
     @observable value: number = 1234;
     @observable tabIndex: number = 0;
     @observable active: boolean = false;
+
+    constructor() {
+        this.messagesRef = FireBaseCollection.bind(this, 'messages', '/Messages');
+    }
+
     setTabIndex(tabIndex: number) {
         this.tabIndex = tabIndex;
     }
@@ -16,8 +24,7 @@ export default class ViewModel implements IViewModel {
         this.active = active;
     }
     send() {
-        let messagesRef = firebase.database().ref('/Messages');
-        let newPostRef = messagesRef.push();
+        let newPostRef = this.messagesRef.push();
         newPostRef.set(this.message).then(() => {
             this.message = '';
         });
