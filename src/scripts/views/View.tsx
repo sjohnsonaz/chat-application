@@ -43,7 +43,7 @@ export default class View extends Component<IViewProps> {
                             </ul>
                             <Form>
                                 <FormContainer title="Message">
-                                    <input type="text" className="input" value={viewModel.message} onchange={this.setMessage} />
+                                    <input type="text" className="input" value={viewModel.message} onkeyup={this.setMessage} />
                                 </FormContainer>
                                 <FormActions>
                                     <Button onclick={this.send} disabled={!viewModel.message} theme="primary">Send</Button>
