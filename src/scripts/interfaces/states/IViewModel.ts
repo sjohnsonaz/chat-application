@@ -1,6 +1,9 @@
 import { IHash } from 'cascade';
 
+import { IAuthState } from './IAuthState';
+
 export interface IViewModel {
+    authState: IAuthState;
     messages: IHash<string>;
     message: string;
     value: number;

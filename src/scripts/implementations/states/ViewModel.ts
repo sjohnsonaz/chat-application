@@ -4,8 +4,11 @@ import firebase from 'firebase';
 import FireBaseCollection from '../../util/FireBaseCollection';
 
 import { IViewModel } from '../../interfaces/states/IViewModel';
+import { IAuthState } from '../../interfaces/states/IAuthState';
+import AuthState from '../../implementations/states/AuthState';
 
 export default class ViewModel implements IViewModel {
+    authState: IAuthState = new AuthState();
     @hash messages: IHash<string> = {};
     @observable message: string = '';
     messagesRef: firebase.database.Reference;
