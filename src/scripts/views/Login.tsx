@@ -20,6 +20,10 @@ export default class Login extends Component<ILoginProps> {
         event.preventDefault();
         this.props.authState.createUser();
     }
+    logout = (event: Event) => {
+        event.preventDefault();
+        this.props.authState.logout();
+    }
     render() {
         let { authState } = this.props;
         return (
@@ -33,6 +37,7 @@ export default class Login extends Component<ILoginProps> {
                     </FormContainer>
                     <FormActions>
                         <Button onclick={this.cancel}>Cancel</Button>
+                        <Button onclick={this.logout}>Logout</Button>
                         <Button onclick={this.login} theme="primary" disabled={authState.loggingIn}>Login</Button>
                         <Button onclick={this.create} theme="primary" disabled={authState.loggingIn}>Create User</Button>
                     </FormActions>

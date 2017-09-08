@@ -17,6 +17,7 @@ export default class ViewModel implements IViewModel {
     @observable active: boolean = false;
 
     constructor() {
+        this.authState.loggedIn = !!firebase.auth().currentUser;
         this.messagesRef = FireBaseCollection.bind(this, 'messages', '/Messages');
     }
 

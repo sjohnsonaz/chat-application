@@ -28,14 +28,21 @@ export default class View extends Component<IViewProps> {
         event.preventDefault();
         this.props.viewModel.authState.open = true;
     }
+    logout = (event: Event) => {
+        event.preventDefault();
+        this.props.viewModel.authState.logout();
+    }
     render() {
         let { viewModel } = this.props;
+        let { authState } = viewModel;
         return (
             <Container menuBar>
                 <MenuBar title="Chat Application" top links={[{
                     simple: true,
                     reverse: true,
-                    title: <Button onclick={this.openLoginModal}>Login</Button>
+                    title: authState.loggedIn ?
+                        <Button onclick={this.logout}>Logout</Button> :
+                        <Button onclick={this.openLoginModal}>Login</Button>
                 }]} />
                 <Login authState={this.props.viewModel.authState} />
                 <Chat viewModel={viewModel} />
