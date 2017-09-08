@@ -25,6 +25,10 @@ export default class Chat extends Component<IChatProps> {
         event.preventDefault();
         this.props.viewModel.authState.open = true;
     }
+    deleteMessage = (data: firebase.database.DataSnapshot, event: Event) => {
+        event.preventDefault();
+        this.props.viewModel.delete(data);
+    }
     render() {
         let { viewModel } = this.props;
         return (
@@ -41,7 +45,12 @@ export default class Chat extends Component<IChatProps> {
                         <ul>
                             {Object.keys(viewModel.messages).map((key) => {
                                 let message = viewModel.messages[key];
-                                return <li key={key}>{message}</li>
+                                return <li key={key}>
+                                    <div>
+                                        <span>{message.val()}</span>
+                                        <Button onclick={this.deleteMessage.bind(this, message)}>X</Button>
+                                    </div>
+                                </li>
                             })}
                         </ul>
                         <Form>

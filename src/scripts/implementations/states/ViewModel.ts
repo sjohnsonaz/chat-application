@@ -9,7 +9,7 @@ import AuthState from '../../implementations/states/AuthState';
 
 export default class ViewModel implements IViewModel {
     authState: IAuthState = new AuthState();
-    @hash messages: IHash<string> = {};
+    @hash messages: IHash<firebase.database.DataSnapshot> = {};
     @observable message: string = '';
     messagesRef: firebase.database.Reference;
     @observable value: number = 1234;
@@ -32,5 +32,8 @@ export default class ViewModel implements IViewModel {
         newPostRef.set(this.message).then(() => {
             this.message = '';
         });
+    }
+    delete(data: firebase.database.DataSnapshot) {
+        data.ref.remove();
     }
 }

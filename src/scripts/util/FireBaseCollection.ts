@@ -6,11 +6,11 @@ export default class FireBaseCollection {
         // Load data
         let messagesRef = firebase.database().ref(collectionName);
         messagesRef.on('child_added', (data) => {
-            viewModel[key][data.key] = data.val();
+            viewModel[key][data.key] = data;
         });
 
         messagesRef.on('child_changed', (data) => {
-            viewModel[key][data.key] = data.val();
+            viewModel[key][data.key] = data;
         });
 
         messagesRef.on('child_removed', (data) => {
