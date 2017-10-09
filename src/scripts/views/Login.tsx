@@ -27,7 +27,7 @@ export default class Login extends Component<ILoginProps> {
     render() {
         let { authState } = this.props;
         return (
-            <Modal open={authState.open} onclose={this.cancel} title="Login" animation="top" lockable locked={authState.loggingIn}>
+            <Modal open={authState.open} onclose={this.cancel} title="Login" animation="top" lockable locked={authState.loggingIn} lockScroll>
                 <Form>
                     <FormContainer title="Email">
                         <FormInput model={authState} modelProp="email" className="input" />

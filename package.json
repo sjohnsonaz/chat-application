@@ -22,9 +22,9 @@
     "mkdocs-deploy": "mkdocs gh-deploy"
   },
   "dependencies": {
-    "artistry": "^0.0.10",
+    "artistry": "^0.0.11",
     "cascade": "^0.1.2",
-    "cascade-components": "^0.0.10",
+    "cascade-components": "^0.0.11",
     "es6-promise": "4.1.1",
     "firebase": "4.3.0"
   },
