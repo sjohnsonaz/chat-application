@@ -43,12 +43,11 @@ export default class Chat extends Component<IChatProps> {
                     ]} animated>
                     <div>
                         <ul>
-                            {Object.keys(viewModel.messages).map((key) => {
-                                let message = viewModel.messages[key];
-                                return <li key={key}>
+                            {viewModel.messageCollection.page.map((item) => {
+                                return <li key={item.key}>
                                     <div>
-                                        <span>{message.val()}</span>
-                                        <Button onclick={this.deleteMessage.bind(this, message)}>X</Button>
+                                        <span>{item.val()}</span>
+                                        <Button onclick={this.deleteMessage.bind(this, item)}>X</Button>
                                     </div>
                                 </li>
                             })}

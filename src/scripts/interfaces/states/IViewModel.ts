@@ -1,11 +1,13 @@
 import { IHash } from 'cascade';
 import firebase from 'firebase';
 
+import FireBaseCollection from '../../util/FireBaseCollection';
+
 import { IAuthState } from './IAuthState';
 
 export interface IViewModel {
     authState: IAuthState;
-    messages: IHash<firebase.database.DataSnapshot>;
+    messageCollection: FireBaseCollection<string>;
     message: string;
     value: number;
     tabIndex: number;

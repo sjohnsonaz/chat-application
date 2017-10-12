@@ -8,32 +8,35 @@ import { IAuthState } from '../../interfaces/states/IAuthState';
 import AuthState from '../../implementations/states/AuthState';
 
 export default class ViewModel implements IViewModel {
+    messageCollection: FireBaseCollection<string> = new FireBaseCollection<string>('/Messages');
     authState: IAuthState = new AuthState();
-    @hash messages: IHash<firebase.database.DataSnapshot> = {};
     @observable message: string = '';
-    messagesRef: firebase.database.Reference;
     @observable value: number = 1234;
     @observable tabIndex: number = 0;
     @observable active: boolean = false;
 
     constructor() {
         this.authState.loggedIn = !!firebase.auth().currentUser;
-        this.messagesRef = FireBaseCollection.bind(this, 'messages', '/Messages');
     }
 
     setTabIndex(tabIndex: number) {
         this.tabIndex = tabIndex;
     }
+
     setActive(active: boolean) {
         this.active = active;
     }
-    send() {
-        let newPostRef = this.messagesRef.push();
-        newPostRef.set(this.message).then(() => {
+
+    async send() {
+        try {
+            await this.messageCollection.create(this.message);
             this.message = '';
-        });
+        } catch (e) {
+
+        }
     }
+
     delete(data: firebase.database.DataSnapshot) {
-        data.ref.remove();
+        this.messageCollection.delete(data);
     }
 }
