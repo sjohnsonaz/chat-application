@@ -1,8 +1,10 @@
 import Cascade, { observable, hash, IHash } from 'cascade';
 import firebase from 'firebase';
 
+import Reference from './Reference';
+
 export default class FireBaseCollection<T> {
-    collection: string;
+    collectionName: string;
     itemsRef: firebase.database.Reference;
     @hash items: IHash<firebase.database.DataSnapshot>;
     @observable get page(): firebase.database.DataSnapshot[] {
@@ -11,10 +13,10 @@ export default class FireBaseCollection<T> {
         });
     }
 
-    constructor(collection: string) {
-        this.collection = collection;
+    constructor(collectionName: string) {
+        this.collectionName = collectionName;
         this.items = {};
-        this.itemsRef = FireBaseCollection.bind(this, 'items', collection);
+        this.itemsRef = FireBaseCollection.bind(this, 'items', collectionName);
     }
 
     async create(item: T): Promise<firebase.database.Reference> {
@@ -44,8 +46,7 @@ export default class FireBaseCollection<T> {
     }
 
     getRef(...args: any[]) {
-        args.unshift(this.collection);
-        return firebase.database().ref(args.join('/'));
+        return Reference.get(this.collectionName, ...args);
     }
 
     static bind(viewModel: any, key: string, collectionName: string) {

@@ -8,7 +8,7 @@ import { IAuthState } from '../../interfaces/states/IAuthState';
 import AuthState from '../../implementations/states/AuthState';
 
 export default class ViewModel implements IViewModel {
-    messageCollection: FireBaseCollection<string> = new FireBaseCollection<string>('/Messages');
+    messageCollection: FireBaseCollection<string> = new FireBaseCollection('/Messages');
     authState: IAuthState = new AuthState();
     @observable message: string = '';
     @observable value: number = 1234;
