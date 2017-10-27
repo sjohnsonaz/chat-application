@@ -8,6 +8,7 @@ export default class AuthState {
     @observable loggedIn: boolean = false;
     @observable email: string = '';
     @observable password: string = '';
+    @observable index: number = 0;
 
     async createUser() {
         this.loggingIn = true;

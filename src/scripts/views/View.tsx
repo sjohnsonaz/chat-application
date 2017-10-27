@@ -45,7 +45,8 @@ export default class View extends Component<IViewProps> {
                         <Button onclick={this.openLoginModal}>Login</Button>
                 }]} />
                 <Login authState={this.props.viewModel.authState} />
-                <Chat viewModel={viewModel} />
+                {authState.loggedIn ?
+                    <Chat viewModel={viewModel} /> : undefined}
             </Container>
         );
     }

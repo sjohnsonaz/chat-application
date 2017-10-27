@@ -9,6 +9,7 @@ export function run() {
         firebase.initializeApp(config);
         firebase.auth();
         firebase.storage();
+        window['firebase'] = firebase;
     }
     finally {
         runView('root');

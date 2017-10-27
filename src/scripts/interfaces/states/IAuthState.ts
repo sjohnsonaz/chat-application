@@ -5,6 +5,7 @@ export interface IAuthState {
     loggedIn: boolean;
     email: string;
     password: string;
+    index: number;
 
     createUser(): Promise<void>;
     login(): Promise<void>;

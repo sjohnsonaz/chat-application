@@ -1,5 +1,5 @@
 import Cascade, { Component } from 'cascade';
-import { Button, Form, FormActions, FormContainer, FormInput, Modal } from 'cascade-components';
+import { Button, Form, FormActions, FormContainer, FormInput, Modal, Tab } from 'cascade-components';
 
 import { IAuthState } from '../interfaces/states/IAuthState';
 
@@ -24,24 +24,43 @@ export default class Login extends Component<ILoginProps> {
         event.preventDefault();
         this.props.authState.logout();
     }
+    setIndex(index: number) {
+        this.props.authState.index = index;
+    }
     render() {
         let { authState } = this.props;
         return (
             <Modal open={authState.open} onclose={this.cancel} title="Login" animation="top" lockable locked={authState.loggingIn} lockScroll>
-                <Form>
-                    <FormContainer title="Email">
-                        <FormInput model={authState} modelProp="email" className="input" />
-                    </FormContainer>
-                    <FormContainer title="Password">
-                        <FormInput model={authState} modelProp="password" type="password" className="input" />
-                    </FormContainer>
-                    <FormActions>
-                        <Button onclick={this.cancel}>Cancel</Button>
-                        <Button onclick={this.logout}>Logout</Button>
-                        <Button onclick={this.login} theme="primary" disabled={authState.loggingIn}>Login</Button>
-                        <Button onclick={this.create} theme="primary" disabled={authState.loggingIn}>Create User</Button>
-                    </FormActions>
-                </Form>
+                <Tab animated titles={['Login', 'Create User']} activeIndex={authState.index} onSelectPanel={this.setIndex.bind(this)}>
+                    <div>
+                        <Form>
+                            <FormContainer title="Email">
+                                <FormInput model={authState} modelProp="email" className="input" />
+                            </FormContainer>
+                            <FormContainer title="Password">
+                                <FormInput model={authState} modelProp="password" type="password" className="input" />
+                            </FormContainer>
+                            <FormActions>
+                                <Button onclick={this.cancel}>Cancel</Button>
+                                <Button onclick={this.login} theme="primary" disabled={authState.loggingIn}>Login</Button>
+                            </FormActions>
+                        </Form>
+                    </div>
+                    <div>
+                        <Form>
+                            <FormContainer title="Email">
+                                <FormInput model={authState} modelProp="email" className="input" />
+                            </FormContainer>
+                            <FormContainer title="Password">
+                                <FormInput model={authState} modelProp="password" type="password" className="input" />
+                            </FormContainer>
+                            <FormActions>
+                                <Button onclick={this.cancel}>Cancel</Button>
+                                <Button onclick={this.create} theme="primary" disabled={authState.loggingIn}>Create User</Button>
+                            </FormActions>
+                        </Form>
+                    </div>
+                </Tab>
             </Modal>
         );
     }
