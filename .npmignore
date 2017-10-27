@@ -11,6 +11,7 @@ src/
 dist/bundle/
 dist/tests/
 dist/mocha/
+public/bundle/
 
 # Sourcemap, log, packed files
 *.map

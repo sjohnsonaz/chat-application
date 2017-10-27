@@ -7,7 +7,7 @@ module.exports = {
         'mochaRunner': './src/mocha/BrowserRunner.ts'
     },
     output: {
-        filename: './dist/bundle/[name].js',
+        filename: './public/bundle/[name].js',
         libraryTarget: 'var',
         library: '[name]'
     },
@@ -46,6 +46,6 @@ module.exports = {
         }]
     },
     plugins: [
-        new ExtractTextPlugin("./dist/bundle/[name].css")
+        new ExtractTextPlugin("./public/bundle/[name].css")
     ]
 };

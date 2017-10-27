@@ -7,7 +7,7 @@ module.exports = {
         'styles': './src/styles/style.styl'
     },
     output: {
-        filename: './dist/bundle/[name].min.js',
+        filename: './public/bundle/[name].min.js',
         libraryTarget: 'var',
         library: '[name]'
     },
@@ -46,6 +46,6 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
-        new ExtractTextPlugin("./dist/bundle/[name].css")
+        new ExtractTextPlugin("./public/bundle/[name].css")
     ]
 };
