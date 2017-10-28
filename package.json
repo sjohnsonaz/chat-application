@@ -23,8 +23,8 @@
   },
   "dependencies": {
     "artistry": "^0.0.12",
-    "cascade": "^0.1.4",
-    "cascade-components": "^0.0.14",
+    "cascade": "^0.1.5",
+    "cascade-components": "^0.0.15",
     "es6-promise": "4.1.1",
     "firebase": "4.3.0"
   },
