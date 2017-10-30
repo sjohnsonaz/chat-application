@@ -33,7 +33,7 @@ export default class Login extends Component<ILoginProps> {
             <Modal open={authState.open} onclose={this.cancel} title="Login" animation="top" lockable locked={authState.loggingIn} lockScroll>
                 <Tab animated titles={['Login', 'Create User']} activeIndex={authState.index} onSelectPanel={this.setIndex.bind(this)}>
                     <div>
-                        <Form>
+                        <Form onsubmit={this.login}>
                             <FormContainer title="Email">
                                 <FormInput model={authState} modelProp="email" className="input" />
                             </FormContainer>
@@ -42,12 +42,12 @@ export default class Login extends Component<ILoginProps> {
                             </FormContainer>
                             <FormActions>
                                 <Button onclick={this.cancel}>Cancel</Button>
-                                <Button onclick={this.login} theme="primary" disabled={authState.loggingIn}>Login</Button>
+                                <Button type="submit" onclick={this.login} theme="primary" disabled={authState.loggingIn}>Login</Button>
                             </FormActions>
                         </Form>
                     </div>
                     <div>
-                        <Form>
+                        <Form onsubmit={this.create}>
                             <FormContainer title="Email">
                                 <FormInput model={authState} modelProp="email" className="input" />
                             </FormContainer>
@@ -56,7 +56,7 @@ export default class Login extends Component<ILoginProps> {
                             </FormContainer>
                             <FormActions>
                                 <Button onclick={this.cancel}>Cancel</Button>
-                                <Button onclick={this.create} theme="primary" disabled={authState.loggingIn}>Create User</Button>
+                                <Button type="submit" onclick={this.create} theme="primary" disabled={authState.loggingIn}>Create User</Button>
                             </FormActions>
                         </Form>
                     </div>

@@ -16,7 +16,7 @@ export default class FireBaseCollection<T> {
     constructor(collectionName: string) {
         this.collectionName = collectionName;
         this.items = {};
-        this.itemsRef = FireBaseCollection.bind(this, 'items', collectionName);
+        this.itemsRef = FireBaseCollection.bindCollection(this, 'items', collectionName);
     }
 
     async create(item: T): Promise<firebase.database.Reference> {
@@ -49,7 +49,7 @@ export default class FireBaseCollection<T> {
         return Reference.get(this.collectionName, ...args);
     }
 
-    static bind(viewModel: any, key: string, collectionName: string) {
+    static bindCollection(viewModel: any, key: string, collectionName: string) {
         // Load data
         let itemsRef = firebase.database().ref(collectionName);
         itemsRef.on('child_added', (data) => {
@@ -62,6 +62,23 @@ export default class FireBaseCollection<T> {
 
         itemsRef.on('child_removed', (data) => {
             delete viewModel[key][data.key];
+        });
+        return itemsRef;
+    }
+
+    static bind(viewModel: any, collectionName: string) {
+        // Load data
+        let itemsRef = firebase.database().ref(collectionName);
+        itemsRef.on('child_added', (data) => {
+            viewModel[data.key] = data;
+        });
+
+        itemsRef.on('child_changed', (data) => {
+            viewModel[data.key] = data;
+        });
+
+        itemsRef.on('child_removed', (data) => {
+            delete viewModel[data.key];
         });
         return itemsRef;
     }

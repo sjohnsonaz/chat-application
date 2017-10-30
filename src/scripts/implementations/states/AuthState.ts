@@ -1,6 +1,10 @@
 import { observable } from 'cascade';
 import firebase from 'firebase';
 
+import FireBaseCollection from '../../util/FireBaseCollection';
+
+import UserModel from './UserModel';
+
 export default class AuthState {
     @observable open: boolean = false;
     @observable loggingIn: boolean = false;
@@ -9,6 +13,9 @@ export default class AuthState {
     @observable email: string = '';
     @observable password: string = '';
     @observable index: number = 0;
+
+    user: UserModel = new UserModel();
+    messageCollection: FireBaseCollection<string> = new FireBaseCollection('/Messages');
 
     async createUser() {
         this.loggingIn = true;

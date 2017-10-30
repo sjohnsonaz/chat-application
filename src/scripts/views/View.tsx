@@ -3,6 +3,7 @@ import { Button, ButtonBar, Container, Form, FormInput, FormActions, FormContain
 
 import { IViewModel } from '../interfaces/states/IViewModel';
 
+import Loading from './Loading';
 import Login from './Login';
 import Chat from './Chat';
 
@@ -46,7 +47,9 @@ export default class View extends Component<IViewProps> {
                 }]} />
                 <Login authState={this.props.viewModel.authState} />
                 {authState.loggedIn ?
-                    <Chat viewModel={viewModel} /> : undefined}
+                    <Chat viewModel={viewModel} /> :
+                    <Loading />
+                }
             </Container>
         );
     }
