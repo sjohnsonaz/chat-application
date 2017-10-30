@@ -1,5 +1,6 @@
 import Cascade, { Component } from 'cascade';
 import { Button, ButtonBar, Form, FormInput, FormActions, FormContainer, Section, Tab } from 'cascade-components';
+import firebase from 'firebase';
 
 import { IViewModel } from '../interfaces/states/IViewModel';
 

@@ -1,5 +1,10 @@
 import firebase from 'firebase';
-require('es6-promise').polyfill();
+import Promise from 'promise-polyfill';
+
+// To add to window
+if (!window['Promise']) {
+    window['Promise'] = Promise;
+}
 
 import config from './config';
 import { run as runView } from './Application';
