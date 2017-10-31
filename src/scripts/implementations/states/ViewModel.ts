@@ -16,12 +16,6 @@ export default class ViewModel implements IViewModel {
     @observable active: boolean = false;
 
     constructor() {
-        window.setTimeout(() => {
-            this.authState.loggedIn = !!firebase.auth().currentUser;
-            if (!this.authState.loggedIn) {
-                this.authState.open = true;
-            }
-        }, 1000);
     }
 
     setTabIndex(tabIndex: number) {

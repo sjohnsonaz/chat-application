@@ -17,6 +17,17 @@ export default class AuthState {
     user: UserModel = new UserModel();
     messageCollection: FireBaseCollection<string> = new FireBaseCollection('/Messages');
 
+    constructor() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.loggedIn = true;
+            } else {
+                this.loggedIn = false;
+                this.open = true;
+            }
+        });
+    }
+
     async createUser() {
         this.loggingIn = true;
         try {
