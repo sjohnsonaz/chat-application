@@ -7,7 +7,7 @@ module.exports = {
         'styles': './src/styles/style.styl'
     },
     output: {
-        filename: './public/bundle/[name].min.js',
+        filename: './public/bundle/[name].js',
         libraryTarget: 'var',
         library: '[name]'
     },

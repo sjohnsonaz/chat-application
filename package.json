@@ -15,6 +15,7 @@
     "min": "webpack --config webpack.config.js --progress",
     "dev": "webpack --config webpack.dev.config.js --progress",
     "watch": "webpack --config webpack.dev.config.js --watch --progress",
+    "deploy": "webpack --config webpack.config.js --progress && firebase deploy",
     "node": "node ./dist/scripts/main.js",
     "nodemon": "nodemon ./dist/scripts/main.js",
     "mkdocs": "mkdocs build",
