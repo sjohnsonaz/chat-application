@@ -23,9 +23,9 @@
     "mkdocs-deploy": "mkdocs gh-deploy"
   },
   "dependencies": {
-    "artistry": "^0.0.14",
+    "artistry": "^0.1.0",
     "cascade": "^0.1.5",
-    "cascade-components": "^0.0.15",
+    "cascade-components": "^0.1.0",
     "firebase": "4.6.0",
     "promise-polyfill": "^6.0.2"
   },

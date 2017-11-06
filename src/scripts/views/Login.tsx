@@ -33,7 +33,7 @@ export default class Login extends Component<ILoginProps> {
             <Modal open={authState.open} onclose={this.cancel} title="Login" animation="top" lockable locked={authState.loggingIn} lockScroll>
                 <Tab animated titles={['Login', 'Create User']} activeIndex={authState.index} onSelectPanel={this.setIndex.bind(this)}>
                     <div>
-                        <Form onsubmit={this.login}>
+                        <Form onsubmit={this.login} onEnter={this.login} onEscape={this.cancel}>
                             <FormContainer title="Email">
                                 <FormInput model={authState} modelProp="email" className="input" />
                             </FormContainer>
@@ -42,12 +42,12 @@ export default class Login extends Component<ILoginProps> {
                             </FormContainer>
                             <FormActions>
                                 <Button onclick={this.cancel}>Cancel</Button>
-                                <Button type="submit" onclick={this.login} theme="primary" disabled={authState.loggingIn}>Login</Button>
+                                <Button onclick={this.login} type="submit" theme="primary" disabled={authState.loggingIn}>Login</Button>
                             </FormActions>
                         </Form>
                     </div>
                     <div>
-                        <Form onsubmit={this.create}>
+                        <Form onsubmit={this.create} onEnter={this.create} onEscape={this.cancel}>
                             <FormContainer title="Email">
                                 <FormInput model={authState} modelProp="email" className="input" />
                             </FormContainer>
@@ -56,7 +56,7 @@ export default class Login extends Component<ILoginProps> {
                             </FormContainer>
                             <FormActions>
                                 <Button onclick={this.cancel}>Cancel</Button>
-                                <Button type="submit" onclick={this.create} theme="primary" disabled={authState.loggingIn}>Create User</Button>
+                                <Button onclick={this.create} type="submit" theme="primary" disabled={authState.loggingIn}>Create User</Button>
                             </FormActions>
                         </Form>
                     </div>
