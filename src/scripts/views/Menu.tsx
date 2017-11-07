@@ -16,8 +16,15 @@ export default class Menu extends Component<IMenuProps> {
         event.preventDefault();
         this.props.viewModel.authState.logout();
     }
+    openPopover = () => {
+        this.props.viewModel.authState.userMenuOpen = true;
+    }
+    closePopover = () => {
+        this.props.viewModel.authState.userMenuOpen = false;
+    }
     render() {
         let { viewModel } = this.props;
+        let { authState } = viewModel;
         return (
             <MenuBar title="Chat Application" top>
                 <MenuBarSpacer />
@@ -30,11 +37,15 @@ export default class Menu extends Component<IMenuProps> {
                             src=""
                             placeholder="C"
                             size="small"
-                            popover={viewModel.authState.loggedIn ?
+                            popover={authState.loggedIn ?
                                 <Button onclick={this.logout}>Logout</Button> :
                                 <Button onclick={this.openLoginModal}>Login</Button>}
                             popoverDirection="bottom"
                             popoverAlign="right"
+                            popoverMenu
+                            popoverOpen={authState.userMenuOpen}
+                            onclick={this.openPopover}
+                            onPopoverClose={this.closePopover}
                         />
                     }
                 />

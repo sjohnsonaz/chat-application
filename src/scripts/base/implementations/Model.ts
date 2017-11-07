@@ -1,15 +1,8 @@
 import { observable } from 'cascade';
 import firebase from 'firebase';
 
-export interface IData {
-    id: string;
-}
-
-export interface IModel<T extends IData> {
-    ref: firebase.database.Reference;
-
-    id: string;
-}
+import { IData } from '../interfaces/IData';
+import { IModel } from '../interfaces/IModel';
 
 export default class Model<T extends IData> implements IModel<T> {
     ref: firebase.database.Reference;
@@ -44,6 +37,10 @@ export default class Model<T extends IData> implements IModel<T> {
         return {
             id: this.id
         } as any;
+    }
+
+    clear() {
+        this.wrap({} as any);
     }
 
     save() {

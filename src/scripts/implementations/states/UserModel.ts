@@ -1,21 +1,16 @@
 import { observable } from 'cascade';
 import firebase from 'firebase';
 
-import Model, { IModel, IData } from './Model';
+import { IUser } from '../../interfaces/data/IUser';
+import { IUserModel } from '../../interfaces/models/IUserModel';
 
-
-export interface IUser extends IData {
-    firstName: string;
-    lastName: string;
-}
-
-export interface IUserModel extends IModel<IUser>, IData {
-
-}
+import Model from '../../base/implementations/Model';
 
 export default class UserModel extends Model<IUser> implements IUserModel {
     @observable firstName: string;
     @observable lastName: string;
+
+    @observable saving: boolean;
 
     wrap(value: IUser) {
         super.wrap(value);
