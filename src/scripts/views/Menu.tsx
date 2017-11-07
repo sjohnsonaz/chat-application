@@ -16,10 +16,12 @@ export default class Menu extends Component<IMenuProps> {
         event.preventDefault();
         this.props.viewModel.authState.logout();
     }
-    openPopover = () => {
-        this.props.viewModel.authState.userMenuOpen = true;
+    togglePopover = (event: Event) => {
+        event.preventDefault();
+        this.props.viewModel.authState.userMenuOpen = !this.props.viewModel.authState.userMenuOpen;
     }
-    closePopover = () => {
+    closePopover = (event: Event) => {
+        event.preventDefault();
         this.props.viewModel.authState.userMenuOpen = false;
     }
     render() {
@@ -44,7 +46,7 @@ export default class Menu extends Component<IMenuProps> {
                             popoverAlign="right"
                             popoverMenu
                             popoverOpen={authState.userMenuOpen}
-                            onclick={this.openPopover}
+                            onclick={this.togglePopover}
                             onPopoverClose={this.closePopover}
                         />
                     }
