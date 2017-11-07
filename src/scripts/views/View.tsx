@@ -30,7 +30,7 @@ export default class View extends Component<IViewProps> {
         let { viewModel } = this.props;
         let { authState } = viewModel;
         return (
-            <Container menuBar>
+            <Container menuBarTop>
                 <Menu viewModel={viewModel} />
                 <Login authState={this.props.viewModel.authState} />
                 {authState.loggedIn ?
