@@ -3,12 +3,12 @@ import firebase from 'firebase';
 
 import FireBaseCollection from '../../util/FireBaseCollection';
 
-import { IViewModel } from '../../interfaces/states/IViewModel';
+import { IViewModel, IMessage } from '../../interfaces/states/IViewModel';
 import { IAuthState } from '../../interfaces/states/IAuthState';
 import AuthState from '../../implementations/states/AuthState';
 
 export default class ViewModel implements IViewModel {
-    messageCollection: FireBaseCollection<string> = new FireBaseCollection('/Messages');
+    messageCollection: FireBaseCollection<IMessage> = new FireBaseCollection('/Messages');
     authState: IAuthState = new AuthState();
     @observable message: string = '';
     @observable value: number = 1234;
@@ -28,7 +28,11 @@ export default class ViewModel implements IViewModel {
 
     async send() {
         try {
-            await this.messageCollection.create(this.message);
+            await this.messageCollection.create({
+                email: firebase.auth().currentUser.email,
+                text: this.message,
+                date: new Date(Date.now()).toUTCString()
+            });
             this.message = '';
         } catch (e) {
 

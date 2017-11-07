@@ -5,9 +5,15 @@ import FireBaseCollection from '../../util/FireBaseCollection';
 
 import { IAuthState } from './IAuthState';
 
+export interface IMessage {
+    email: string;
+    text: string;
+    date: string;
+}
+
 export interface IViewModel {
     authState: IAuthState;
-    messageCollection: FireBaseCollection<string>;
+    messageCollection: FireBaseCollection<IMessage>;
     message: string;
     value: number;
     tabIndex: number;

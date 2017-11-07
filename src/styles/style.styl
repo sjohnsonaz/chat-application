@@ -11,3 +11,25 @@ json("../../styleconfig.json")
     font-size: 30px;
     font-weight: bold;
 }
+
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    & > .message-info {
+        display: flex;
+        flex-direction: row;
+
+        & > .message-email {
+            flex-grow: 1;
+            font-weight: bold;
+        }
+
+        & > .message-controls {
+        }
+    }
+
+    & > .message-text {
+    }
+}

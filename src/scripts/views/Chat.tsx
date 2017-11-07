@@ -2,7 +2,7 @@ import Cascade, { Component } from 'cascade';
 import { Button, ButtonBar, Form, FormInput, FormActions, FormContainer, Section, Tab } from 'cascade-components';
 import firebase from 'firebase';
 
-import { IViewModel } from '../interfaces/states/IViewModel';
+import { IViewModel, IMessage } from '../interfaces/states/IViewModel';
 
 export interface IChatProps {
     viewModel: IViewModel;
@@ -43,16 +43,20 @@ export default class Chat extends Component<IChatProps> {
                         'Tab 2'
                     ]} animated>
                     <div>
-                        <ul>
+                        <div>
                             {viewModel.messageCollection.page.map((item) => {
-                                return <li key={item.key}>
-                                    <div>
-                                        <span>{item.val()}</span>
-                                        <Button onclick={this.deleteMessage.bind(this, item)}>X</Button>
+                                let message: IMessage = item.val();
+                                return (
+                                    <div class="message">
+                                        <div class="message-info">
+                                            <div class="message-email">{message.email}</div>
+                                            <div class="message-controls"><Button onclick={this.deleteMessage.bind(this, item)}>X</Button></div>
+                                        </div>
+                                        <div class="message-text">{message.text}</div>
                                     </div>
-                                </li>
+                                );
                             })}
-                        </ul>
+                        </div>
                         <Form>
                             <FormContainer title="Message">
                                 <input type="text" className="input" value={viewModel.message} onkeyup={this.setMessage} />
