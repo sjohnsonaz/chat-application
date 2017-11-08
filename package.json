@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "artistry": "^0.1.0",
-    "cascade": "^0.1.5",
+    "cascade": "^0.1.8",
     "cascade-components": "^0.1.1",
     "firebase": "4.6.0",
     "promise-polyfill": "^6.0.2"
