@@ -41,7 +41,7 @@ export interface IViewModel {
     active: boolean;
     setTabIndex(tabIndex: number): void;
     setActive(active: boolean): void;
-    openConversation(conversation: TypedSnapshop<IConversation>): firebase.database.Reference;
+    openConversation(conversation: TypedSnapshop<IConversation>): Promise<firebase.database.Reference>;
     createConversation(): Promise<firebase.database.Reference>;
     deleteConversation(conversation: TypedSnapshop<IConversation>): Promise<any>;
     sendMessage(): Promise<firebase.database.Reference>;

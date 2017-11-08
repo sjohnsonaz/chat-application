@@ -32,9 +32,9 @@ export default class ViewModel implements IViewModel {
         this.active = active;
     }
 
-    openConversation(conversation: TypedSnapshop<IConversation>) {
+    async openConversation(conversation: TypedSnapshop<IConversation>) {
         this.conversation = conversation;
-        let ref = this.conversationMessagesCollection.updateRef(conversation.key);
+        let ref = await this.conversationMessagesCollection.updateRef(conversation.key);
         this.tabIndex = 1;
         return ref;
     }

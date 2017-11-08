@@ -60,7 +60,9 @@ export default class FireBaseCollection<T> {
         this.ref.off();
     }
 
-    start() {
+    async start(): Promise<{
+        [index: string]: T
+    }> {
         this.ref.on('child_added', (data) => {
             this.items[data.key] = data;
         });
@@ -72,18 +74,21 @@ export default class FireBaseCollection<T> {
         this.ref.on('child_removed', (data) => {
             delete this.items[data.key];
         });
+
+        let data: firebase.database.DataSnapshot = await this.ref.once('value');
+        return data.val();
     }
 
     getRef(...args: any[]) {
         return Reference.get(this.collectionName, ...args);
     }
 
-    updateRef(...args: any[]) {
+    async updateRef(...args: any[]) {
         this.stop();
         this.clear();
         let ref = this.getRef(...args);
         this.ref = ref;
-        this.start();
+        await this.start();
         return ref;
     }
 
