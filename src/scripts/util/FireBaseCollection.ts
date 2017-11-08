@@ -70,7 +70,7 @@ export default class FireBaseCollection<T> {
         });
 
         this.ref.on('child_removed', (data) => {
-            this.items[data.key];
+            delete this.items[data.key];
         });
     }
 
