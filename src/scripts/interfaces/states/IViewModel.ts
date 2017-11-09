@@ -34,11 +34,14 @@ export interface IViewModel {
     conversationCollection: FireBaseCollection<IConversation>;
     conversationMessagesCollection: FireBaseCollection<IMessage>;
     conversationMembersCollection: FireBaseCollection<IConversationMembers>;
-    message: string;
     title: string;
+    titleValid: boolean;
+    message: string;
+    messageValid: boolean;
     value: number;
     tabIndex: number;
     active: boolean;
+
     setTabIndex(tabIndex: number): void;
     setActive(active: boolean): void;
     openConversation(conversation: TypedSnapshop<IConversation>): Promise<firebase.database.Reference>;

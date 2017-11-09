@@ -4,8 +4,8 @@ import firebase from 'firebase';
 
 import { IViewModel, IMessage } from '../interfaces/states/IViewModel';
 
-import Conversations from './Conversations';
-import Messages from './Messages';
+import Conversations from './conversations/Conversations';
+import Messages from './messages/Messages';
 
 export interface IChatProps {
     viewModel: IViewModel;

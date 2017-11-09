@@ -2,9 +2,7 @@ import Cascade, { Component } from 'cascade';
 import { Button } from 'cascade-components';
 import firebase from 'firebase';
 
-import { IViewModel, IMessage } from '../interfaces/states/IViewModel';
-
-import Conversations from './Conversations';
+import { IViewModel, IMessage } from '../../interfaces/states/IViewModel';
 
 export interface IMessageListProps {
     viewModel: IViewModel;

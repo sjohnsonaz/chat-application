@@ -19,6 +19,8 @@ export default class FireBaseCollection<T> {
             return this.items[key];
         });
     }
+    @observable loading: boolean = false;
+    @observable creating: boolean = false;
 
     constructor(collectionName: string) {
         this.collectionName = collectionName;
@@ -27,8 +29,17 @@ export default class FireBaseCollection<T> {
     }
 
     async create(item: T): Promise<firebase.database.Reference> {
-        let newPostRef = this.ref.push();
-        await newPostRef.set(item);
+        this.creating = true;
+        try {
+            var newPostRef = this.ref.push();
+            await newPostRef.set(item);
+        }
+        catch (e) {
+            throw e;
+        }
+        finally {
+            this.creating = false;
+        }
         return newPostRef;
     }
 
@@ -63,20 +74,30 @@ export default class FireBaseCollection<T> {
     async start(): Promise<{
         [index: string]: T
     }> {
-        this.ref.on('child_added', (data) => {
-            this.items[data.key] = data;
-        });
+        this.loading = true;
+        try {
+            this.ref.on('child_added', (data) => {
+                this.items[data.key] = data;
+            });
 
-        this.ref.on('child_changed', (data) => {
-            this.items[data.key] = data;
-        });
+            this.ref.on('child_changed', (data) => {
+                this.items[data.key] = data;
+            });
 
-        this.ref.on('child_removed', (data) => {
-            delete this.items[data.key];
-        });
+            this.ref.on('child_removed', (data) => {
+                delete this.items[data.key];
+            });
 
-        let data: firebase.database.DataSnapshot = await this.ref.once('value');
-        return data.val();
+            let data: firebase.database.DataSnapshot = await this.ref.once('value');
+            var value = data.val();
+        }
+        catch (e) {
+            throw e;
+        }
+        finally {
+            this.loading = false;
+        }
+        return value;
     }
 
     getRef(...args: any[]) {

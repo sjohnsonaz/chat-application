@@ -15,7 +15,13 @@ export default class ViewModel implements IViewModel {
     authState: IAuthState = new AuthState();
     @observable conversation: TypedSnapshop<IConversation>;
     @observable title: string = '';
+    @observable get titleValid() {
+        return !!this.title;
+    }
     @observable message: string = '';
+    @observable get messageValid() {
+        return !!this.message;
+    }
     @observable value: number = 1234;
     @observable tabIndex: number = 0;
     @observable active: boolean = false;
