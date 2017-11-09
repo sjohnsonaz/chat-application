@@ -2,19 +2,19 @@ import Cascade, { Component } from 'cascade';
 import { Button } from 'cascade-components';
 
 import { IViewModel, IConversation } from '../../interfaces/states/IViewModel';
-import { TypedSnapshop } from '../../util/FireBaseCollection';
+import { TypedSnapshot } from '../../util/FireBaseCollection';
 
 export interface IConversationListProps {
     viewModel: IViewModel;
 }
 
 export default class ConversationList extends Component<IConversationListProps> {
-    openConversation(conversation: TypedSnapshop<IConversation>, event: MouseEvent) {
+    openConversation(conversation: TypedSnapshot<IConversation>, event: MouseEvent) {
         event.preventDefault();
         this.props.viewModel.openConversation(conversation);
     }
 
-    deleteConversation(conversation: TypedSnapshop<IConversation>, event: MouseEvent) {
+    deleteConversation(conversation: TypedSnapshot<IConversation>, event: MouseEvent) {
         event.preventDefault();
         this.props.viewModel.deleteConversation(conversation);
     }

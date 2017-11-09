@@ -3,24 +3,22 @@ import firebase from 'firebase';
 
 import Reference from './Reference';
 
-export interface TypedSnapshop<T> extends firebase.database.DataSnapshot {
-    child<U>(path: string): TypedSnapshop<U>;
+export interface TypedSnapshot<T> extends firebase.database.DataSnapshot {
+    child<U>(path: string): TypedSnapshot<U>;
     exportVal(): T;
-    forEach<U>(action: (a: TypedSnapshop<U>) => boolean): boolean;
+    forEach<U>(action: (a: TypedSnapshot<U>) => boolean): boolean;
     val(): T;
 }
 
 export default class FireBaseCollection<T> {
     collectionName: string;
     ref: firebase.database.Reference;
-    @hash items: IHash<TypedSnapshop<T>>;
-    @observable get page(): TypedSnapshop<T>[] {
+    @hash items: IHash<TypedSnapshot<T>>;
+    @observable get page(): TypedSnapshot<T>[] {
         return Object.keys(this.items).map(key => {
             return this.items[key];
         });
     }
-    @observable loading: boolean = false;
-    @observable creating: boolean = false;
 
     constructor(collectionName: string) {
         this.collectionName = collectionName;
@@ -29,17 +27,8 @@ export default class FireBaseCollection<T> {
     }
 
     async create(item: T): Promise<firebase.database.Reference> {
-        this.creating = true;
-        try {
-            var newPostRef = this.ref.push();
-            await newPostRef.set(item);
-        }
-        catch (e) {
-            throw e;
-        }
-        finally {
-            this.creating = false;
-        }
+        var newPostRef = this.ref.push();
+        await newPostRef.set(item);
         return newPostRef;
     }
 
@@ -74,30 +63,20 @@ export default class FireBaseCollection<T> {
     async start(): Promise<{
         [index: string]: T
     }> {
-        this.loading = true;
-        try {
-            this.ref.on('child_added', (data) => {
-                this.items[data.key] = data;
-            });
+        this.ref.on('child_added', (data) => {
+            this.items[data.key] = data;
+        });
 
-            this.ref.on('child_changed', (data) => {
-                this.items[data.key] = data;
-            });
+        this.ref.on('child_changed', (data) => {
+            this.items[data.key] = data;
+        });
 
-            this.ref.on('child_removed', (data) => {
-                delete this.items[data.key];
-            });
+        this.ref.on('child_removed', (data) => {
+            delete this.items[data.key];
+        });
 
-            let data: firebase.database.DataSnapshot = await this.ref.once('value');
-            var value = data.val();
-        }
-        catch (e) {
-            throw e;
-        }
-        finally {
-            this.loading = false;
-        }
-        return value;
+        let data: firebase.database.DataSnapshot = await this.ref.once('value');
+        return data.val();
     }
 
     getRef(...args: any[]) {

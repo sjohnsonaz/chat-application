@@ -1,19 +1,19 @@
 import { observable, hash, ObservableArray, IHash } from 'cascade';
 import firebase from 'firebase';
 
-import FireBaseCollection, { TypedSnapshop } from '../../util/FireBaseCollection';
+import ManagedCollection, { TypedSnapshot } from '../../util/ManagedCollection';
 
 import { IViewModel, IMessage, IConversation, IConversationMembers, IConversationMessages } from '../../interfaces/states/IViewModel';
 import { IAuthState } from '../../interfaces/states/IAuthState';
 import AuthState from '../../implementations/states/AuthState';
 
 export default class ViewModel implements IViewModel {
-    conversationCollection: FireBaseCollection<IConversation> = new FireBaseCollection('/Conversations');
-    conversationMessagesCollection: FireBaseCollection<IMessage> = new FireBaseCollection('/ConversationMessages');
-    conversationMembersCollection: FireBaseCollection<IConversationMembers> = new FireBaseCollection('/ConversationMembers');
+    conversationCollection: ManagedCollection<IConversation> = new ManagedCollection('/Conversations');
+    conversationMessagesCollection: ManagedCollection<IMessage> = new ManagedCollection('/ConversationMessages');
+    conversationMembersCollection: ManagedCollection<IConversationMembers> = new ManagedCollection('/ConversationMembers');
 
     authState: IAuthState = new AuthState();
-    @observable conversation: TypedSnapshop<IConversation>;
+    @observable conversation: TypedSnapshot<IConversation>;
     @observable title: string = '';
     @observable get titleValid() {
         return !!this.title;
@@ -38,7 +38,7 @@ export default class ViewModel implements IViewModel {
         this.active = active;
     }
 
-    async openConversation(conversation: TypedSnapshop<IConversation>) {
+    async openConversation(conversation: TypedSnapshot<IConversation>) {
         this.conversation = conversation;
         let ref = await this.conversationMessagesCollection.updateRef(conversation.key);
         this.tabIndex = 1;
@@ -58,7 +58,7 @@ export default class ViewModel implements IViewModel {
         return ref;
     }
 
-    async deleteConversation(conversation: TypedSnapshop<IConversation>) {
+    async deleteConversation(conversation: TypedSnapshot<IConversation>) {
         if (this.conversation === conversation) {
             this.conversation = undefined;
         }
@@ -76,7 +76,7 @@ export default class ViewModel implements IViewModel {
         return ref;
     }
 
-    delete(data: TypedSnapshop<IMessage>) {
+    delete(data: TypedSnapshot<IMessage>) {
         this.conversationMessagesCollection.delete(data);
     }
 }

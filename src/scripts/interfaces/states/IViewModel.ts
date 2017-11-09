@@ -1,7 +1,7 @@
 import { IHash } from 'cascade';
 import firebase from 'firebase';
 
-import FireBaseCollection, { TypedSnapshop } from '../../util/FireBaseCollection';
+import ManagedCollection, { TypedSnapshot } from '../../util/ManagedCollection';
 
 import { IAuthState } from './IAuthState';
 
@@ -31,10 +31,10 @@ export interface IConversationMembers {
 
 export interface IViewModel {
     authState: IAuthState;
-    conversation: TypedSnapshop<IConversation>;
-    conversationCollection: FireBaseCollection<IConversation>;
-    conversationMessagesCollection: FireBaseCollection<IMessage>;
-    conversationMembersCollection: FireBaseCollection<IConversationMembers>;
+    conversation: TypedSnapshot<IConversation>;
+    conversationCollection: ManagedCollection<IConversation>;
+    conversationMessagesCollection: ManagedCollection<IMessage>;
+    conversationMembersCollection: ManagedCollection<IConversationMembers>;
     title: string;
     titleValid: boolean;
     message: string;
@@ -45,9 +45,9 @@ export interface IViewModel {
 
     setTabIndex(tabIndex: number): void;
     setActive(active: boolean): void;
-    openConversation(conversation: TypedSnapshop<IConversation>): Promise<firebase.database.Reference>;
+    openConversation(conversation: TypedSnapshot<IConversation>): Promise<firebase.database.Reference>;
     createConversation(): Promise<firebase.database.Reference>;
-    deleteConversation(conversation: TypedSnapshop<IConversation>): Promise<any>;
+    deleteConversation(conversation: TypedSnapshot<IConversation>): Promise<any>;
     sendMessage(): Promise<firebase.database.Reference>;
     delete(data: firebase.database.DataSnapshot): void;
 }
