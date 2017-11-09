@@ -97,38 +97,4 @@ export default class FireBaseCollection<T> {
         await this.ref.remove();
         this.clear();
     }
-
-    static bindCollection(viewModel: any, key: string, collectionName: string) {
-        // Load data
-        let itemsRef = firebase.database().ref(collectionName);
-        itemsRef.on('child_added', (data) => {
-            viewModel[key][data.key] = data;
-        });
-
-        itemsRef.on('child_changed', (data) => {
-            viewModel[key][data.key] = data;
-        });
-
-        itemsRef.on('child_removed', (data) => {
-            delete viewModel[key][data.key];
-        });
-        return itemsRef;
-    }
-
-    static bind(viewModel: any, collectionName: string) {
-        // Load data
-        let itemsRef = firebase.database().ref(collectionName);
-        itemsRef.on('child_added', (data) => {
-            viewModel[data.key] = data;
-        });
-
-        itemsRef.on('child_changed', (data) => {
-            viewModel[data.key] = data;
-        });
-
-        itemsRef.on('child_removed', (data) => {
-            delete viewModel[data.key];
-        });
-        return itemsRef;
-    }
 }
