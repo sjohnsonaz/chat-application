@@ -59,7 +59,10 @@ export default class ViewModel implements IViewModel {
     }
 
     async deleteConversation(conversation: TypedSnapshop<IConversation>) {
-        await this.conversationMessagesCollection.remove();
+        if (this.conversation === conversation) {
+            this.conversation = undefined;
+        }
+        await this.conversationMessagesCollection.getRef(conversation.key).remove();
         await this.conversationCollection.delete(conversation);
     }
 

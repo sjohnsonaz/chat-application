@@ -31,6 +31,7 @@ export interface IConversationMembers {
 
 export interface IViewModel {
     authState: IAuthState;
+    conversation: TypedSnapshop<IConversation>;
     conversationCollection: FireBaseCollection<IConversation>;
     conversationMessagesCollection: FireBaseCollection<IMessage>;
     conversationMembersCollection: FireBaseCollection<IConversationMembers>;
